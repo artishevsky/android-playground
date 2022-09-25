@@ -1,0 +1,18 @@
+# IntelliJ files
+*.iml
+.idea/
+
+# Gradle files
+.gradle/
+
+# Local configuration file
+local.properties
+
+# MacOS DS_Store
+.DS_Store
+
+# Build folder
+/build
+
+# Android Studio captures folder
+/captures
