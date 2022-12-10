@@ -12,10 +12,23 @@ class RetryingTests {
         assertEquals("banana", retrying("banana"))
     }
 
+    @Test
+    fun `retries if exception`() {
+        var countdown = 1
+        val wrapped: (String) -> String = { if (countdown-- == 0) it else error("deliberate") }
+        val retrying: (String) -> String = retry(wrapped)
+        assertEquals("banana", retrying("banana"))
+    }
+
 }
 
 fun <T, R> retry(function: (T) -> R): (T) -> R {
     return { it ->
-        function(it)
+        try {
+            function(it)
+        } catch (x: Exception) {
+            function(it)
+        }
+
     }
 }
